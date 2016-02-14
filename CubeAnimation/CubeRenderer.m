@@ -11,8 +11,8 @@
 #import "CubeSourceMesh.h"
 #import "CubeDestinationMesh.h"
 @interface CubeRenderer ()<GLKViewDelegate> {
-    GLuint srcFaceProgram, srcFacePercentLoc, srcMvpLoc, srcFaceSamplerLoc, srcFaceEdgeWidthLoc;
-    GLuint dstFaceProgram, dstFacePercentLoc, dstMvpLoc, dstFaceSamplerLoc, dstFaceEdgeWidthLoc;
+    GLuint srcFaceProgram, srcFacePercentLoc, srcMvpLoc, srcFaceSamplerLoc, srcFaceEdgeWidthLoc, srcDirectionLoc;
+    GLuint dstFaceProgram, dstFacePercentLoc, dstMvpLoc, dstFaceSamplerLoc, dstFaceEdgeWidthLoc, dstDirectionLoc;
     GLuint srcTexture;
     GLuint dstTexture;
     GLfloat percent;
@@ -27,6 +27,7 @@
 @property (nonatomic, strong) GLKView *animationView;
 @property (nonatomic, strong) CubeSourceMesh *sourceMesh;
 @property (nonatomic, strong) CubeDestinationMesh *destinationMesh;
+@property (nonatomic) CubeTransitionDirection direction;
 @end
 
 @implementation CubeRenderer
@@ -37,13 +38,14 @@
     self.completion = completion;
     self.timingFunction = timingFunction;
     self.elapsedTime = 0;
+    self.direction = direction;
     percent = 0;
     [self setupOpenGL];
     [self setupTexturesWithSource:fromView destination:toView screenScale:screenScale];
     self.animationView = [[GLKView alloc] initWithFrame:fromView.frame context:self.context];
     self.animationView.delegate = self;
-    self.sourceMesh = [[CubeSourceMesh alloc] initWithView:fromView];
-    self.destinationMesh = [[CubeDestinationMesh alloc] initWithView:toView];
+    self.sourceMesh = [[CubeSourceMesh alloc] initWithView:fromView transitionDirection:direction];
+    self.destinationMesh = [[CubeDestinationMesh alloc] initWithView:toView transitionDirection:direction];
     [containerView addSubview:self.animationView];
     self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update:)];
     [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
@@ -73,6 +75,7 @@
     glUniformMatrix4fv(dstMvpLoc, 1, GL_FALSE, mvpMatrix.m);
     glUniform1f(dstFacePercentLoc, percent);
     glUniform1f(dstFaceEdgeWidthLoc, view.bounds.size.width);
+    glUniform1i(dstDirectionLoc, self.direction);
     [self.destinationMesh prepareToDraw];
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, dstTexture);
@@ -85,6 +88,7 @@
     glUniformMatrix4fv(srcMvpLoc, 1, GL_FALSE, mvpMatrix.m);
     glUniform1f(srcFacePercentLoc, percent);
     glUniform1f(srcFaceEdgeWidthLoc, view.bounds.size.width);
+    glUniform1i(srcDirectionLoc, self.direction);
     [self.sourceMesh prepareToDraw];
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, srcTexture);
@@ -117,11 +121,13 @@
     srcFacePercentLoc = glGetUniformLocation(srcFaceProgram, "u_percent");
     srcFaceEdgeWidthLoc = glGetUniformLocation(srcFaceProgram, "u_edgeWidth");
     srcFaceSamplerLoc = glGetUniformLocation(srcFaceSamplerLoc, "s_tex");
+    srcDirectionLoc = glGetUniformLocation(srcFaceProgram, "u_direction");
     glUseProgram(dstFaceProgram);
     dstMvpLoc = glGetUniformLocation(dstFaceProgram, "u_mvpMatrix");
     dstFacePercentLoc = glGetUniformLocation(dstFaceProgram, "u_percent");
     dstFaceSamplerLoc = glGetUniformLocation(dstFaceProgram, "s_tex");
     dstFaceEdgeWidthLoc = glGetUniformLocation(dstFaceProgram, "u_edgeWidth");
+    dstDirectionLoc = glGetUniformLocation(dstFaceProgram, "u_direction");
     glClearColor(0, 0, 0, 1);
 }
 

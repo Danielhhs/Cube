@@ -8,11 +8,7 @@
 
 #import <GLKit/GLKit.h>
 #import "NSBKeyframeAnimationFunctions.h"
-typedef NS_ENUM(NSInteger, CubeTransitionDirection) {
-    CubeTransitionDirectionLeftToRight = 0,
-    CubeTransitionDirectionRightToLeft = 1,
-};
-
+#import "CubeMesh.h"
 @interface CubeRenderer : NSObject
 - (void) startCubeTransitionFromView:(UIView *)fromView toView:(UIView *)toView inContainerView:(UIView *)containerView direction:(CubeTransitionDirection)direction duration:(NSTimeInterval)duration screenScale:(CGFloat)screenScale timingFunction:(NSBKeyframeAnimationFunction)timingFunction completion:(void (^)(void))completion;
 @end

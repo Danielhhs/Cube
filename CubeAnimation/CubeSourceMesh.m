@@ -11,15 +11,14 @@
     SceneMeshVertex *vertices;
 }
 @property (nonatomic) NSInteger vertexCount;
-@property (nonatomic) NSInteger indexCount;
 @end
 
 @implementation CubeSourceMesh
 
-- (instancetype) initWithView:(UIView *)view
+- (instancetype) initWithView:(UIView *)view transitionDirection:(CubeTransitionDirection)direction
 {
     _vertexCount = 4;
-    _indexCount = 6;
+    self.indexCount = 6;
     vertices = malloc(_vertexCount * sizeof(SceneMeshVertex));
     
     vertices[0].position = GLKVector3Make(0, 0, 0);
@@ -34,10 +33,5 @@
     NSData *vertexData = [NSData dataWithBytes:vertices length:_vertexCount * sizeof(SceneMeshVertex)];
     NSData *indexData = [NSData dataWithBytes:indices length:sizeof(indices)];
     return [self initWithVerticesData:vertexData indicesData:indexData];
-}
-
-- (void) drawEntireMesh
-{
-    glDrawElements(GL_TRIANGLES, (GLsizei)self.indexCount, GL_UNSIGNED_SHORT, NULL);
 }
 @end

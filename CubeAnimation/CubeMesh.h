@@ -8,6 +8,16 @@
 
 #import "SceneMesh.h"
 
+
+typedef NS_ENUM(NSInteger, CubeTransitionDirection) {
+    CubeTransitionDirectionLeftToRight = 0,
+    CubeTransitionDirectionRightToLeft = 1,
+    CubeTransitionDirectionTopToBottom = 2,
+    CubeTransitionDirectionBottomToTop = 3,
+};
+
 @interface CubeMesh : SceneMesh
-- (instancetype) initWithView:(UIView *)view;
+
+@property (nonatomic) NSInteger indexCount;
+- (instancetype) initWithView:(UIView *)view transitionDirection:(CubeTransitionDirection)direction;
 @end

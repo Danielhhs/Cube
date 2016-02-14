@@ -17,9 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.renderer = [[CubeRenderer alloc] init];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, self.view.bounds.size.height)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     imageView.image = [UIImage imageNamed:@"image.jpg"];
-    UIImageView *toImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, self.view.bounds.size.height)];
+    UIImageView *toImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     toImageView.image = [UIImage imageNamed:@"toImage.jpg"];
     [self.renderer startCubeTransitionFromView:imageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionLeftToRight duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInBack completion:nil];
 }
