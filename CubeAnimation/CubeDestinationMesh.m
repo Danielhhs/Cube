@@ -52,6 +52,22 @@
             vertices[3].position = GLKVector3Make(0, view.frame.size.height, 0);
         }
             break;
+        case CubeTransitionDirectionTopToBottom:
+        {
+            vertices[0].position = GLKVector3Make(0, view.bounds.size.height, 0);
+            vertices[1].position = GLKVector3Make(view.bounds.size.width, view.bounds.size.height, 0);
+            vertices[2].position = GLKVector3Make(0, view.frame.size.height, -view.bounds.size.height);
+            vertices[3].position = GLKVector3Make(view.bounds.size.width, view.frame.size.height, -view.bounds.size.height);
+        }
+            break;
+        case CubeTransitionDirectionBottomToTop:
+        {
+            vertices[0].position = GLKVector3Make(0, 0, -view.bounds.size.height);
+            vertices[1].position = GLKVector3Make(view.bounds.size.width, 0, -view.bounds.size.height);
+            vertices[2].position = GLKVector3Make(0, 0, 0);
+            vertices[3].position = GLKVector3Make(view.bounds.size.width, 0, 0);
+        }
+            break;
         default:
             break;
     }

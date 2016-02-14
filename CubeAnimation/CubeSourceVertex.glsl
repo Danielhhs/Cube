@@ -36,12 +36,41 @@ vec4 updatedPositionForLeftToRight() {
     return position;
 }
 
+vec4 updatedPositionForTopToBottom() {
+    vec4 position = a_position;
+    float rotation = u_percent * 3.14 / 2.f;
+    if (position.y == 0.f) {
+        position.z = -1.f * u_edgeWidth * sin(rotation);
+        position.y = u_edgeWidth - (u_edgeWidth * cos(rotation) + u_edgeWidth * u_percent);
+    } else {
+        position.z = 0.f;
+        position.y = u_edgeWidth * (1.f - u_percent);
+    }
+    return position;
+}
+
+vec4 updatedPositionForBottomToTop() {
+    vec4 position = a_position;
+    float rotation = u_percent * 3.14 / 2.f;
+    if (position.y == 0.f) {
+        position.z = 0.f;
+        position.y = u_edgeWidth * u_percent;
+    } else {
+        position.z = -1.f * u_edgeWidth * sin(rotation);
+        position.y = u_edgeWidth * u_percent + u_edgeWidth * cos(rotation);
+    }
+    return position;
+}
 
 vec4 updatedPosition() {
     if (u_direction == 0) {
         return updatedPositionForLeftToRight();
     } else if (u_direction == 1) {
         return updatedPositionForRightToLeft();
+    } else if (u_direction == 2) {
+        return updatedPositionForTopToBottom();
+    } else if (u_direction == 3) {
+        return updatedPositionForBottomToTop();
     }
 }
 

@@ -57,7 +57,7 @@
     glClear(GL_COLOR_BUFFER_BIT);
     GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2);
     GLfloat aspect = (GLfloat)view.bounds.size.width / view.bounds.size.height;
-    GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90), aspect, 1, 1000);
+    GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90), aspect, 1, -1000);
     mvpMatrix = GLKMatrix4Multiply(perspective, modelView);
     
     if (percent <= 0.5) {
@@ -128,7 +128,7 @@
     dstFaceSamplerLoc = glGetUniformLocation(dstFaceProgram, "s_tex");
     dstFaceEdgeWidthLoc = glGetUniformLocation(dstFaceProgram, "u_edgeWidth");
     dstDirectionLoc = glGetUniformLocation(dstFaceProgram, "u_direction");
-    glClearColor(0, 0, 0, 1);
+    glClearColor(1, 0, 0, 1);
 }
 
 - (void) setupTexturesWithSource:(UIView *)source destination:(UIView *)destination screenScale:(CGFloat)screenScale

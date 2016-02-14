@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CubeAnimation/CubeRenderer.m"
-            timestampString = "477131610.230857"
+            filePath = "CubeAnimation/CubeDestinationMesh.m"
+            timestampString = "477135578.260242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "-drawSourceFaceInView:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CubeAnimation/CubeRenderer.m"
-            timestampString = "477131618.120659"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "-drawDestinationFaceInView:"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "-setupVerticesForView:direction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
