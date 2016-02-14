@@ -1,0 +1,597 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		54792F881C7023E000F55486 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792F871C7023E000F55486 /* main.m */; };
+		54792F8B1C7023E000F55486 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792F8A1C7023E000F55486 /* AppDelegate.m */; };
+		54792F8E1C7023E000F55486 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792F8D1C7023E000F55486 /* ViewController.m */; };
+		54792F911C7023E000F55486 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54792F8F1C7023E000F55486 /* Main.storyboard */; };
+		54792F931C7023E000F55486 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54792F921C7023E000F55486 /* Assets.xcassets */; };
+		54792F961C7023E000F55486 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54792F941C7023E000F55486 /* LaunchScreen.storyboard */; };
+		54792FA11C7023E000F55486 /* CubeAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792FA01C7023E000F55486 /* CubeAnimationTests.m */; };
+		54792FAC1C7023E000F55486 /* CubeAnimationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792FAB1C7023E000F55486 /* CubeAnimationUITests.m */; };
+		54792FBB1C70252000F55486 /* OpenGLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792FBA1C70252000F55486 /* OpenGLHelper.m */; };
+		54792FBE1C7025AD00F55486 /* CubeRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792FBD1C7025AD00F55486 /* CubeRenderer.m */; };
+		54792FC11C70283900F55486 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54792FBF1C70283900F55486 /* GLKit.framework */; };
+		54792FC21C70283900F55486 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54792FC01C70283900F55486 /* OpenGLES.framework */; };
+		54792FC51C7029FE00F55486 /* NSBKeyframeAnimationFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = 54792FC31C7029FE00F55486 /* NSBKeyframeAnimationFunctions.c */; };
+		54792FC71C7031D800F55486 /* CubeSourceVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 54792FC61C7031D800F55486 /* CubeSourceVertex.glsl */; };
+		54792FC91C7031E500F55486 /* CubeSourceFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 54792FC81C7031E500F55486 /* CubeSourceFragment.glsl */; };
+		54792FCB1C7031F300F55486 /* CubeDestinationVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 54792FCA1C7031F300F55486 /* CubeDestinationVertex.glsl */; };
+		54792FCD1C70320900F55486 /* CubeDestinationFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 54792FCC1C70320900F55486 /* CubeDestinationFragment.glsl */; };
+		54792FD01C70513E00F55486 /* CubeSourceMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792FCF1C70513E00F55486 /* CubeSourceMesh.m */; };
+		54792FD31C70517600F55486 /* SceneMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792FD21C70517600F55486 /* SceneMesh.m */; };
+		54792FD61C7053D900F55486 /* CubeDestinationMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792FD51C7053D900F55486 /* CubeDestinationMesh.m */; };
+		54792FD81C7056B600F55486 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 54792FD71C7056B600F55486 /* image.jpg */; };
+		54792FDA1C70596E00F55486 /* toImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 54792FD91C70596E00F55486 /* toImage.jpg */; };
+		54792FDD1C7066B300F55486 /* CubeMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792FDC1C7066B300F55486 /* CubeMesh.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		54792F9D1C7023E000F55486 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54792F7B1C7023E000F55486 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 54792F821C7023E000F55486;
+			remoteInfo = CubeAnimation;
+		};
+		54792FA81C7023E000F55486 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54792F7B1C7023E000F55486 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 54792F821C7023E000F55486;
+			remoteInfo = CubeAnimation;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		54792F831C7023E000F55486 /* CubeAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CubeAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54792F871C7023E000F55486 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		54792F891C7023E000F55486 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		54792F8A1C7023E000F55486 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		54792F8C1C7023E000F55486 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		54792F8D1C7023E000F55486 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		54792F901C7023E000F55486 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		54792F921C7023E000F55486 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		54792F951C7023E000F55486 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		54792F971C7023E000F55486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54792F9C1C7023E000F55486 /* CubeAnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CubeAnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		54792FA01C7023E000F55486 /* CubeAnimationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CubeAnimationTests.m; sourceTree = "<group>"; };
+		54792FA21C7023E000F55486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54792FA71C7023E000F55486 /* CubeAnimationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CubeAnimationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		54792FAB1C7023E000F55486 /* CubeAnimationUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CubeAnimationUITests.m; sourceTree = "<group>"; };
+		54792FAD1C7023E000F55486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54792FB91C70252000F55486 /* OpenGLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLHelper.h; sourceTree = "<group>"; };
+		54792FBA1C70252000F55486 /* OpenGLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLHelper.m; sourceTree = "<group>"; };
+		54792FBC1C7025AD00F55486 /* CubeRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeRenderer.h; sourceTree = "<group>"; };
+		54792FBD1C7025AD00F55486 /* CubeRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CubeRenderer.m; sourceTree = "<group>"; };
+		54792FBF1C70283900F55486 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		54792FC01C70283900F55486 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		54792FC31C7029FE00F55486 /* NSBKeyframeAnimationFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NSBKeyframeAnimationFunctions.c; sourceTree = "<group>"; };
+		54792FC41C7029FE00F55486 /* NSBKeyframeAnimationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBKeyframeAnimationFunctions.h; sourceTree = "<group>"; };
+		54792FC61C7031D800F55486 /* CubeSourceVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CubeSourceVertex.glsl; sourceTree = "<group>"; };
+		54792FC81C7031E500F55486 /* CubeSourceFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CubeSourceFragment.glsl; sourceTree = "<group>"; };
+		54792FCA1C7031F300F55486 /* CubeDestinationVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CubeDestinationVertex.glsl; sourceTree = "<group>"; };
+		54792FCC1C70320900F55486 /* CubeDestinationFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CubeDestinationFragment.glsl; sourceTree = "<group>"; };
+		54792FCE1C70513E00F55486 /* CubeSourceMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeSourceMesh.h; sourceTree = "<group>"; };
+		54792FCF1C70513E00F55486 /* CubeSourceMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CubeSourceMesh.m; sourceTree = "<group>"; };
+		54792FD11C70517600F55486 /* SceneMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneMesh.h; sourceTree = "<group>"; };
+		54792FD21C70517600F55486 /* SceneMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneMesh.m; sourceTree = "<group>"; };
+		54792FD41C7053D900F55486 /* CubeDestinationMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeDestinationMesh.h; sourceTree = "<group>"; };
+		54792FD51C7053D900F55486 /* CubeDestinationMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CubeDestinationMesh.m; sourceTree = "<group>"; };
+		54792FD71C7056B600F55486 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		54792FD91C70596E00F55486 /* toImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = toImage.jpg; sourceTree = "<group>"; };
+		54792FDB1C7066B300F55486 /* CubeMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeMesh.h; sourceTree = "<group>"; };
+		54792FDC1C7066B300F55486 /* CubeMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CubeMesh.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		54792F801C7023E000F55486 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54792FC11C70283900F55486 /* GLKit.framework in Frameworks */,
+				54792FC21C70283900F55486 /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54792F991C7023E000F55486 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54792FA41C7023E000F55486 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		54792F7A1C7023E000F55486 = {
+			isa = PBXGroup;
+			children = (
+				54792FBF1C70283900F55486 /* GLKit.framework */,
+				54792FC01C70283900F55486 /* OpenGLES.framework */,
+				54792F851C7023E000F55486 /* CubeAnimation */,
+				54792F9F1C7023E000F55486 /* CubeAnimationTests */,
+				54792FAA1C7023E000F55486 /* CubeAnimationUITests */,
+				54792F841C7023E000F55486 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		54792F841C7023E000F55486 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54792F831C7023E000F55486 /* CubeAnimation.app */,
+				54792F9C1C7023E000F55486 /* CubeAnimationTests.xctest */,
+				54792FA71C7023E000F55486 /* CubeAnimationUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		54792F851C7023E000F55486 /* CubeAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				54792F891C7023E000F55486 /* AppDelegate.h */,
+				54792F8A1C7023E000F55486 /* AppDelegate.m */,
+				54792F8C1C7023E000F55486 /* ViewController.h */,
+				54792F8D1C7023E000F55486 /* ViewController.m */,
+				54792FD71C7056B600F55486 /* image.jpg */,
+				54792FD91C70596E00F55486 /* toImage.jpg */,
+				54792FB91C70252000F55486 /* OpenGLHelper.h */,
+				54792FBA1C70252000F55486 /* OpenGLHelper.m */,
+				54792FBC1C7025AD00F55486 /* CubeRenderer.h */,
+				54792FBD1C7025AD00F55486 /* CubeRenderer.m */,
+				54792FD11C70517600F55486 /* SceneMesh.h */,
+				54792FD21C70517600F55486 /* SceneMesh.m */,
+				54792FDB1C7066B300F55486 /* CubeMesh.h */,
+				54792FDC1C7066B300F55486 /* CubeMesh.m */,
+				54792FCE1C70513E00F55486 /* CubeSourceMesh.h */,
+				54792FCF1C70513E00F55486 /* CubeSourceMesh.m */,
+				54792FD41C7053D900F55486 /* CubeDestinationMesh.h */,
+				54792FD51C7053D900F55486 /* CubeDestinationMesh.m */,
+				54792FC61C7031D800F55486 /* CubeSourceVertex.glsl */,
+				54792FC81C7031E500F55486 /* CubeSourceFragment.glsl */,
+				54792FCA1C7031F300F55486 /* CubeDestinationVertex.glsl */,
+				54792FCC1C70320900F55486 /* CubeDestinationFragment.glsl */,
+				54792FC31C7029FE00F55486 /* NSBKeyframeAnimationFunctions.c */,
+				54792FC41C7029FE00F55486 /* NSBKeyframeAnimationFunctions.h */,
+				54792F8F1C7023E000F55486 /* Main.storyboard */,
+				54792F921C7023E000F55486 /* Assets.xcassets */,
+				54792F941C7023E000F55486 /* LaunchScreen.storyboard */,
+				54792F971C7023E000F55486 /* Info.plist */,
+				54792F861C7023E000F55486 /* Supporting Files */,
+			);
+			path = CubeAnimation;
+			sourceTree = "<group>";
+		};
+		54792F861C7023E000F55486 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				54792F871C7023E000F55486 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		54792F9F1C7023E000F55486 /* CubeAnimationTests */ = {
+			isa = PBXGroup;
+			children = (
+				54792FA01C7023E000F55486 /* CubeAnimationTests.m */,
+				54792FA21C7023E000F55486 /* Info.plist */,
+			);
+			path = CubeAnimationTests;
+			sourceTree = "<group>";
+		};
+		54792FAA1C7023E000F55486 /* CubeAnimationUITests */ = {
+			isa = PBXGroup;
+			children = (
+				54792FAB1C7023E000F55486 /* CubeAnimationUITests.m */,
+				54792FAD1C7023E000F55486 /* Info.plist */,
+			);
+			path = CubeAnimationUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		54792F821C7023E000F55486 /* CubeAnimation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54792FB01C7023E000F55486 /* Build configuration list for PBXNativeTarget "CubeAnimation" */;
+			buildPhases = (
+				54792F7F1C7023E000F55486 /* Sources */,
+				54792F801C7023E000F55486 /* Frameworks */,
+				54792F811C7023E000F55486 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CubeAnimation;
+			productName = CubeAnimation;
+			productReference = 54792F831C7023E000F55486 /* CubeAnimation.app */;
+			productType = "com.apple.product-type.application";
+		};
+		54792F9B1C7023E000F55486 /* CubeAnimationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54792FB31C7023E000F55486 /* Build configuration list for PBXNativeTarget "CubeAnimationTests" */;
+			buildPhases = (
+				54792F981C7023E000F55486 /* Sources */,
+				54792F991C7023E000F55486 /* Frameworks */,
+				54792F9A1C7023E000F55486 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				54792F9E1C7023E000F55486 /* PBXTargetDependency */,
+			);
+			name = CubeAnimationTests;
+			productName = CubeAnimationTests;
+			productReference = 54792F9C1C7023E000F55486 /* CubeAnimationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		54792FA61C7023E000F55486 /* CubeAnimationUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54792FB61C7023E000F55486 /* Build configuration list for PBXNativeTarget "CubeAnimationUITests" */;
+			buildPhases = (
+				54792FA31C7023E000F55486 /* Sources */,
+				54792FA41C7023E000F55486 /* Frameworks */,
+				54792FA51C7023E000F55486 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				54792FA91C7023E000F55486 /* PBXTargetDependency */,
+			);
+			name = CubeAnimationUITests;
+			productName = CubeAnimationUITests;
+			productReference = 54792FA71C7023E000F55486 /* CubeAnimationUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		54792F7B1C7023E000F55486 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = cn.daniel;
+				TargetAttributes = {
+					54792F821C7023E000F55486 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					54792F9B1C7023E000F55486 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 54792F821C7023E000F55486;
+					};
+					54792FA61C7023E000F55486 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 54792F821C7023E000F55486;
+					};
+				};
+			};
+			buildConfigurationList = 54792F7E1C7023E000F55486 /* Build configuration list for PBXProject "CubeAnimation" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 54792F7A1C7023E000F55486;
+			productRefGroup = 54792F841C7023E000F55486 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				54792F821C7023E000F55486 /* CubeAnimation */,
+				54792F9B1C7023E000F55486 /* CubeAnimationTests */,
+				54792FA61C7023E000F55486 /* CubeAnimationUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		54792F811C7023E000F55486 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54792F961C7023E000F55486 /* LaunchScreen.storyboard in Resources */,
+				54792F931C7023E000F55486 /* Assets.xcassets in Resources */,
+				54792FDA1C70596E00F55486 /* toImage.jpg in Resources */,
+				54792FCB1C7031F300F55486 /* CubeDestinationVertex.glsl in Resources */,
+				54792FD81C7056B600F55486 /* image.jpg in Resources */,
+				54792F911C7023E000F55486 /* Main.storyboard in Resources */,
+				54792FCD1C70320900F55486 /* CubeDestinationFragment.glsl in Resources */,
+				54792FC91C7031E500F55486 /* CubeSourceFragment.glsl in Resources */,
+				54792FC71C7031D800F55486 /* CubeSourceVertex.glsl in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54792F9A1C7023E000F55486 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54792FA51C7023E000F55486 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		54792F7F1C7023E000F55486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54792FD61C7053D900F55486 /* CubeDestinationMesh.m in Sources */,
+				54792F8E1C7023E000F55486 /* ViewController.m in Sources */,
+				54792FD31C70517600F55486 /* SceneMesh.m in Sources */,
+				54792FBE1C7025AD00F55486 /* CubeRenderer.m in Sources */,
+				54792FD01C70513E00F55486 /* CubeSourceMesh.m in Sources */,
+				54792FDD1C7066B300F55486 /* CubeMesh.m in Sources */,
+				54792FC51C7029FE00F55486 /* NSBKeyframeAnimationFunctions.c in Sources */,
+				54792F8B1C7023E000F55486 /* AppDelegate.m in Sources */,
+				54792FBB1C70252000F55486 /* OpenGLHelper.m in Sources */,
+				54792F881C7023E000F55486 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54792F981C7023E000F55486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54792FA11C7023E000F55486 /* CubeAnimationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54792FA31C7023E000F55486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54792FAC1C7023E000F55486 /* CubeAnimationUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		54792F9E1C7023E000F55486 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 54792F821C7023E000F55486 /* CubeAnimation */;
+			targetProxy = 54792F9D1C7023E000F55486 /* PBXContainerItemProxy */;
+		};
+		54792FA91C7023E000F55486 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 54792F821C7023E000F55486 /* CubeAnimation */;
+			targetProxy = 54792FA81C7023E000F55486 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		54792F8F1C7023E000F55486 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				54792F901C7023E000F55486 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		54792F941C7023E000F55486 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				54792F951C7023E000F55486 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		54792FAE1C7023E000F55486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		54792FAF1C7023E000F55486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		54792FB11C7023E000F55486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CubeAnimation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.daniel.CubeAnimation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		54792FB21C7023E000F55486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CubeAnimation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.daniel.CubeAnimation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		54792FB41C7023E000F55486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CubeAnimationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.daniel.CubeAnimationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CubeAnimation.app/CubeAnimation";
+			};
+			name = Debug;
+		};
+		54792FB51C7023E000F55486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CubeAnimationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.daniel.CubeAnimationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CubeAnimation.app/CubeAnimation";
+			};
+			name = Release;
+		};
+		54792FB71C7023E000F55486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CubeAnimationUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.daniel.CubeAnimationUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = CubeAnimation;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		54792FB81C7023E000F55486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CubeAnimationUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.daniel.CubeAnimationUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = CubeAnimation;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		54792F7E1C7023E000F55486 /* Build configuration list for PBXProject "CubeAnimation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54792FAE1C7023E000F55486 /* Debug */,
+				54792FAF1C7023E000F55486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		54792FB01C7023E000F55486 /* Build configuration list for PBXNativeTarget "CubeAnimation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54792FB11C7023E000F55486 /* Debug */,
+				54792FB21C7023E000F55486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		54792FB31C7023E000F55486 /* Build configuration list for PBXNativeTarget "CubeAnimationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54792FB41C7023E000F55486 /* Debug */,
+				54792FB51C7023E000F55486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		54792FB61C7023E000F55486 /* Build configuration list for PBXNativeTarget "CubeAnimationUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54792FB71C7023E000F55486 /* Debug */,
+				54792FB81C7023E000F55486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 54792F7B1C7023E000F55486 /* Project object */;
+}
