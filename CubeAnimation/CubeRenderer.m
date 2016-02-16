@@ -28,6 +28,7 @@
 @property (nonatomic, strong) CubeSourceMesh *sourceMesh;
 @property (nonatomic, strong) CubeDestinationMesh *destinationMesh;
 @property (nonatomic) CubeTransitionDirection direction;
+@property (nonatomic) GLfloat edgeWidth;
 @end
 
 @implementation CubeRenderer
@@ -40,6 +41,7 @@
     self.elapsedTime = 0;
     self.direction = direction;
     percent = 0;
+    [self generateEdgeWidthForView:fromView];
     [self setupOpenGL];
     [self setupTexturesWithSource:fromView destination:toView screenScale:screenScale];
     self.animationView = [[GLKView alloc] initWithFrame:fromView.frame context:self.context];
@@ -51,13 +53,29 @@
     [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 }
 
+- (void) generateEdgeWidthForView:(UIView *)view
+{
+    switch (self.direction) {
+        case CubeTransitionDirectionTopToBottom:
+        case CubeTransitionDirectionBottomToTop:
+            self.edgeWidth = view.frame.size.height;
+            break;
+        case CubeTransitionDirectionRightToLeft:
+        case CubeTransitionDirectionLeftToRight:
+            self.edgeWidth = view.frame.size.width;
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Drawing
 - (void) glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2);
+    GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2 / tanf(M_PI / 12));
     GLfloat aspect = (GLfloat)view.bounds.size.width / view.bounds.size.height;
-    GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90), aspect, 1, -1000);
+    GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(30), aspect, 1, 1000);
     mvpMatrix = GLKMatrix4Multiply(perspective, modelView);
     
     if (percent <= 0.5) {
@@ -74,7 +92,7 @@
     glUseProgram(dstFaceProgram);
     glUniformMatrix4fv(dstMvpLoc, 1, GL_FALSE, mvpMatrix.m);
     glUniform1f(dstFacePercentLoc, percent);
-    glUniform1f(dstFaceEdgeWidthLoc, view.bounds.size.width);
+    glUniform1f(dstFaceEdgeWidthLoc, self.edgeWidth);
     glUniform1i(dstDirectionLoc, self.direction);
     [self.destinationMesh prepareToDraw];
     glActiveTexture(GL_TEXTURE0);
@@ -87,7 +105,7 @@
     glUseProgram(srcFaceProgram);
     glUniformMatrix4fv(srcMvpLoc, 1, GL_FALSE, mvpMatrix.m);
     glUniform1f(srcFacePercentLoc, percent);
-    glUniform1f(srcFaceEdgeWidthLoc, view.bounds.size.width);
+    glUniform1f(srcFaceEdgeWidthLoc, self.edgeWidth);
     glUniform1i(srcDirectionLoc, self.direction);
     [self.sourceMesh prepareToDraw];
     glActiveTexture(GL_TEXTURE0);
@@ -128,7 +146,7 @@
     dstFaceSamplerLoc = glGetUniformLocation(dstFaceProgram, "s_tex");
     dstFaceEdgeWidthLoc = glGetUniformLocation(dstFaceProgram, "u_edgeWidth");
     dstDirectionLoc = glGetUniformLocation(dstFaceProgram, "u_direction");
-    glClearColor(1, 0, 0, 1);
+    glClearColor(0, 0, 0, 1);
 }
 
 - (void) setupTexturesWithSource:(UIView *)source destination:(UIView *)destination screenScale:(CGFloat)screenScale
