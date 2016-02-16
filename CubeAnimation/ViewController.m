@@ -32,6 +32,19 @@
     [recoverButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [recoverButton addTarget:self action:@selector(handleRecover) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:recoverButton];
+    
+    
+    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(100, 400, 100, 40)];
+    [leftButton setTitle:@"Notification" forState:UIControlStateNormal];
+    [leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(handleLeftNotification) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:leftButton];
+    
+    UIButton *leftRecoverButton = [[UIButton alloc] initWithFrame:CGRectMake(230, 400, 100, 40)];
+    [leftRecoverButton setTitle:@"Recover" forState:UIControlStateNormal];
+    [leftRecoverButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [leftRecoverButton addTarget:self action:@selector(handleLeftRecover) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:leftRecoverButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,19 +54,39 @@
 
 - (void) handleNotification
 {
-    
     self.renderer = [[CubeRenderer alloc] init];
-    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 64)];
+    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     fromImageView.image = [self imageFromView:self.view inRect:fromImageView.frame];
     UIImageView *toImageView = [[UIImageView alloc] initWithFrame:fromImageView.frame];
     toImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:fromImageView.frame];
     [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionTopToBottom duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
 }
 
+
+- (void) handleLeftNotification
+{
+    self.renderer = [[CubeRenderer alloc] init];
+    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, self.view.bounds.size.height)];
+    fromImageView.image = [self imageFromView:self.view inRect:fromImageView.frame];
+    UIImageView *toImageView = [[UIImageView alloc] initWithFrame:fromImageView.frame];
+    toImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:fromImageView.frame];
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionRightToLeft duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+}
+
+- (void) handleLeftRecover
+{
+    self.renderer = [[CubeRenderer alloc] init];
+    UIImageView * toImageView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, self.view.bounds.size.height)];
+    toImageView.image = [self imageFromView:self.view inRect:toImageView.frame];
+    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:toImageView.frame];
+    fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:toImageView.frame];
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionLeftToRight duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+}
+
 - (void) handleRecover
 {
     self.renderer = [[CubeRenderer alloc] init];
-    UIImageView *toImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 64)];
+    UIImageView *toImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     toImageView.image = [self imageFromView:self.view inRect:toImageView.frame];
     UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:toImageView.frame];
     fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:toImageView.frame];

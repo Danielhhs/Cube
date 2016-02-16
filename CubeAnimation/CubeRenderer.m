@@ -73,9 +73,9 @@
 - (void) glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2 / tanf(M_PI / 12));
+    GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2 / tanf(M_PI / 4));
     GLfloat aspect = (GLfloat)view.bounds.size.width / view.bounds.size.height;
-    GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(30), aspect, 1, 1000);
+    GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90), aspect, 1, 1000);
     mvpMatrix = GLKMatrix4Multiply(perspective, modelView);
     
     if (percent <= 0.5) {
@@ -120,7 +120,7 @@
     if (self.elapsedTime < self.duration) {
         GLfloat populatedTime = self.timingFunction(self.elapsedTime * 1000, 0, 1, self.duration * 1000);
         percent = populatedTime / self.duration;
-        NSLog(@"percent = %g", populatedTime);
+//        NSLog(@"percent = %g", populatedTime);
         [self.animationView display];
     } else {
         percent = 1;
