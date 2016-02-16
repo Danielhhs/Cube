@@ -10,6 +10,11 @@ layout(location = 2) in vec2 a_texCoords;
 
 out vec2 v_texCoords;
 
+const float pi = 3.1415926;
+const float pi_2 = pi / 2.f;
+const float pi_4 = pi / 4.f;
+const float sqrt_2 = sqrt(2.f);
+
 vec4 updatedPositionForRightToLeft() {
     vec4 position = a_position;
     float rotation = u_percent * 3.14 / 2.f;
@@ -25,7 +30,7 @@ vec4 updatedPositionForRightToLeft() {
 
 vec4 updatedPositionForLeftToRight() {
     vec4 position = a_position;
-    float rotation = u_percent * 3.14 / 2.f;
+    float rotation = u_percent * pi_2;
     if (position.x == 0.f) {
         position.x = u_edgeWidth * u_percent;
         position.z = 0.f;
@@ -38,26 +43,30 @@ vec4 updatedPositionForLeftToRight() {
 
 vec4 updatedPositionForTopToBottom() {
     vec4 position = a_position;
-    float rotation = u_percent * 3.14 / 2.f;
+    float rotation = u_percent * pi_2 - pi_4;
+    float radius = u_edgeWidth * sqrt_2 / 2.f;
+    vec2 center = vec2(u_edgeWidth /  2.f, -u_edgeWidth / 2.f);
     if (position.y == 0.f) {
-        position.z = -1.f * u_edgeWidth * sin(rotation);
-        position.y = u_edgeWidth - (u_edgeWidth * cos(rotation) + u_edgeWidth * u_percent);
+        position.y = center.x - radius * cos(rotation);
+        position.z = center.y - radius * sin(rotation);
     } else {
-        position.z = 0.f;
-        position.y = u_edgeWidth * (1.f - u_percent);
+        position.y = center.x - radius * sin(rotation);
+        position.z = radius * cos(rotation) + center.y;
     }
     return position;
 }
 
 vec4 updatedPositionForBottomToTop() {
     vec4 position = a_position;
-    float rotation = u_percent * 3.14 / 2.f;
+    vec2 center = vec2(u_edgeWidth /  2.f, -u_edgeWidth / 2.f);
+    float rotation = u_percent * pi_2 - pi_4;
+    float radius = u_edgeWidth * sqrt_2 / 2.f;
     if (position.y == 0.f) {
-        position.z = 0.f;
-        position.y = u_edgeWidth * u_percent;
+        position.y = center.x + radius * sin(rotation);
+        position.z = radius * cos(rotation) + center.y;
     } else {
-        position.z = -1.f * u_edgeWidth * sin(rotation);
-        position.y = u_edgeWidth * u_percent + u_edgeWidth * cos(rotation);
+        position.z = center.y - radius * sin(rotation);
+        position.y = center.x + radius * cos(rotation);
     }
     return position;
 }

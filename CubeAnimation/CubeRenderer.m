@@ -118,7 +118,9 @@
 {
     self.elapsedTime += displayLink.duration;
     if (self.elapsedTime < self.duration) {
-        percent = self.elapsedTime / self.duration;
+        GLfloat populatedTime = self.timingFunction(self.elapsedTime * 1000, 0, 1, self.duration * 1000);
+        percent = populatedTime / self.duration;
+        NSLog(@"percent = %g", populatedTime);
         [self.animationView display];
     } else {
         percent = 1;

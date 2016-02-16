@@ -20,11 +20,18 @@
     imageView.image = [UIImage imageNamed:@"image.jpg"];
     [self.view addSubview:imageView];
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(100, 300, 100, 50)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(100, 300, 100, 40)];
     [button setTitle:@"Notification" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(handleNotification) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    
+    
+    UIButton *recoverButton = [[UIButton alloc] initWithFrame:CGRectMake(230, 300, 100, 40)];
+    [recoverButton setTitle:@"Recover" forState:UIControlStateNormal];
+    [recoverButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [recoverButton addTarget:self action:@selector(handleRecover) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:recoverButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,18 +44,41 @@
     
     self.renderer = [[CubeRenderer alloc] init];
     UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 64)];
-    fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"image.jpg"] inRect:fromImageView.frame];
+    fromImageView.image = [self imageFromView:self.view inRect:fromImageView.frame];
     UIImageView *toImageView = [[UIImageView alloc] initWithFrame:fromImageView.frame];
     toImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:fromImageView.frame];
-    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionTopToBottom duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInBack completion:nil];
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionTopToBottom duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+}
+
+- (void) handleRecover
+{
+    self.renderer = [[CubeRenderer alloc] init];
+    UIImageView *toImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 64)];
+    toImageView.image = [self imageFromView:self.view inRect:toImageView.frame];
+    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:toImageView.frame];
+    fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:toImageView.frame];
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionBottomToTop duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
 }
 
 - (UIImage *) imageFromImage:(UIImage *)srcImage inRect:(CGRect) rect
 {
-    UIGraphicsBeginImageContextWithOptions(srcImage.size, YES, 0.F);
-    [srcImage drawInRect:CGRectMake(0, 0, srcImage.size.width, srcImage.size.height)];
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, 0.F);
+    [srcImage drawInRect:self.view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     CGImageRef croppedImage = CGImageCreateWithImageInRect(image.CGImage, rect);
+    image = [UIImage imageWithCGImage:croppedImage];
+    CGImageRelease(croppedImage);
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+- (UIImage *) imageFromView:(UIView *)view inRect:(CGRect)rect
+{
+    UIGraphicsBeginImageContextWithOptions(view.frame.size, YES, 0.f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [view.layer renderInContext:context];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    CGImageRef croppedImage = CGImageCreateWithImageInRect(image.CGImage, CGRectMake(rect.origin.x * 2, rect.origin.y * 2, rect.size.width * 2, rect.size.height * 2));
     image = [UIImage imageWithCGImage:croppedImage];
     CGImageRelease(croppedImage);
     UIGraphicsEndImageContext();
