@@ -6,9 +6,11 @@ uniform float u_edgeWidth;
 uniform int u_direction;
 
 layout(location = 0) in vec4 a_position;
+layout(location = 1) in vec3 a_normal;
 layout(location = 2) in vec2 a_texCoords;
 
 out vec2 v_texCoords;
+out vec3 v_normal;
 
 const float pi = 3.1415926;
 const float pi_2 = pi / 2.f;

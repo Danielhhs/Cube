@@ -15,7 +15,7 @@
 
 @implementation CubeDestinationMesh
 
-- (instancetype) initWithView:(UIView *)view transitionDirection:(CubeTransitionDirection)direction
+- (instancetype) initWithView:(UIView *)view columnCount:(NSInteger)columnCount transitionDirection:(CubeTransitionDirection)direction
 {
     _vertexCount = 4;
     self.indexCount = 6;

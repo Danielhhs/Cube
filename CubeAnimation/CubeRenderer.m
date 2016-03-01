@@ -33,7 +33,7 @@
 
 @implementation CubeRenderer
 
-- (void) startCubeTransitionFromView:(UIView *)fromView toView:(UIView *)toView inContainerView:(UIView *)containerView direction:(CubeTransitionDirection)direction duration:(NSTimeInterval)duration screenScale:(CGFloat)screenScale timingFunction:(NSBKeyframeAnimationFunction)timingFunction completion:(void (^)(void))completion
+- (void) startCubeTransitionFromView:(UIView *)fromView toView:(UIView *)toView columnCount:(NSInteger)columnCount inContainerView:(UIView *)containerView direction:(CubeTransitionDirection)direction duration:(NSTimeInterval)duration screenScale:(CGFloat)screenScale timingFunction:(NSBKeyframeAnimationFunction)timingFunction completion:(void (^)(void))completion
 {
     self.duration = duration;
     self.completion = completion;
@@ -41,28 +41,28 @@
     self.elapsedTime = 0;
     self.direction = direction;
     percent = 0;
-    [self generateEdgeWidthForView:fromView];
+    [self generateEdgeWidthForView:fromView columnCount:columnCount];
     [self setupOpenGL];
     [self setupTexturesWithSource:fromView destination:toView screenScale:screenScale];
     self.animationView = [[GLKView alloc] initWithFrame:fromView.frame context:self.context];
     self.animationView.delegate = self;
-    self.sourceMesh = [[CubeSourceMesh alloc] initWithView:fromView transitionDirection:direction];
-    self.destinationMesh = [[CubeDestinationMesh alloc] initWithView:toView transitionDirection:direction];
+    self.sourceMesh = [[CubeSourceMesh alloc] initWithView:fromView columnCount:2 transitionDirection:direction];
+    self.destinationMesh = [[CubeDestinationMesh alloc] initWithView:toView columnCount:2 transitionDirection:direction];
     [containerView addSubview:self.animationView];
     self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update:)];
     [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 }
 
-- (void) generateEdgeWidthForView:(UIView *)view
+- (void) generateEdgeWidthForView:(UIView *)view columnCount:(NSInteger)columnCount
 {
     switch (self.direction) {
         case CubeTransitionDirectionTopToBottom:
         case CubeTransitionDirectionBottomToTop:
-            self.edgeWidth = view.frame.size.height;
+            self.edgeWidth = view.frame.size.height / columnCount;
             break;
         case CubeTransitionDirectionRightToLeft:
         case CubeTransitionDirectionLeftToRight:
-            self.edgeWidth = view.frame.size.width;
+            self.edgeWidth = view.frame.size.width / columnCount;
             break;
         default:
             break;
@@ -75,7 +75,9 @@
     glClear(GL_COLOR_BUFFER_BIT);
     GLfloat aspect = (GLfloat)view.bounds.size.width / view.bounds.size.height;
     GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2 / tan(M_PI / 24));
-    GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(15), aspect, 1, 10000);
+        GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(15), aspect, 1, 1000);
+//    GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2 / tan(M_PI / 6) - 100);
+//    GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60), aspect, 1, 1000);
     mvpMatrix = GLKMatrix4Multiply(perspective, modelView);
 //    mvpMatrix = GLKMatrix4MakeOrtho(0, view.drawableWidth, 0, view.drawableHeight, -1000, 1000);
     
@@ -121,12 +123,15 @@
     if (self.elapsedTime < self.duration) {
         GLfloat populatedTime = self.timingFunction(self.elapsedTime * 1000, 0, 1, self.duration * 1000);
         percent = populatedTime / self.duration;
-//        NSLog(@"percent = %g", populatedTime);
         [self.animationView display];
     } else {
         percent = 1;
         [self.animationView display];
-        
+        [self.animationView removeFromSuperview];
+        [self tearDownGL];
+        if (self.completion) {
+            self.completion();
+        }
     }
 }
 
@@ -150,6 +155,11 @@
     dstFaceEdgeWidthLoc = glGetUniformLocation(dstFaceProgram, "u_edgeWidth");
     dstDirectionLoc = glGetUniformLocation(dstFaceProgram, "u_direction");
     glClearColor(0, 0, 0, 1);
+}
+
+- (void) tearDownGL
+{
+    
 }
 
 - (void) setupTexturesWithSource:(UIView *)source destination:(UIView *)destination screenScale:(CGFloat)screenScale

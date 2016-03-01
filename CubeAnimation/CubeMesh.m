@@ -9,7 +9,7 @@
 #import "CubeMesh.h"
 
 @implementation CubeMesh
-- (instancetype) initWithView:(UIView *)view transitionDirection:(CubeTransitionDirection)direction
+- (instancetype) initWithView:(UIView *)view columnCount:(NSInteger)columnCount transitionDirection:(CubeTransitionDirection)direction
 {
     return nil;
 }

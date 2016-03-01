@@ -55,18 +55,20 @@
 - (void) handleNotification
 {
     self.renderer = [[CubeRenderer alloc] init];
-    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+//    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     fromImageView.image = [self imageFromView:self.view inRect:fromImageView.frame];
     UIImageView *toImageView = [[UIImageView alloc] initWithFrame:fromImageView.frame];
     toImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:fromImageView.frame];
-    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionTopToBottom duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionTopToBottom duration:2 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
 }
 
 
 - (void) handleLeftNotification
 {
     self.renderer = [[CubeRenderer alloc] init];
-    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, self.view.bounds.size.height)];
+    //    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     fromImageView.image = [self imageFromView:self.view inRect:fromImageView.frame];
     UIImageView *toImageView = [[UIImageView alloc] initWithFrame:fromImageView.frame];
     toImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:fromImageView.frame];
@@ -76,7 +78,8 @@
 - (void) handleLeftRecover
 {
     self.renderer = [[CubeRenderer alloc] init];
-    UIImageView * toImageView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, self.view.bounds.size.height)];
+//    UIImageView * toImageView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, self.view.bounds.size.height)];
+    UIImageView * toImageView= [[UIImageView alloc] initWithFrame:self.view.bounds];
     toImageView.image = [self imageFromView:self.view inRect:toImageView.frame];
     UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:toImageView.frame];
     fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:toImageView.frame];
@@ -86,7 +89,8 @@
 - (void) handleRecover
 {
     self.renderer = [[CubeRenderer alloc] init];
-    UIImageView *toImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    //    UIImageView * toImageView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, self.view.bounds.size.height)];
+    UIImageView * toImageView= [[UIImageView alloc] initWithFrame:self.view.bounds];
     toImageView.image = [self imageFromView:self.view inRect:toImageView.frame];
     UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:toImageView.frame];
     fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:toImageView.frame];
@@ -95,11 +99,9 @@
 
 - (UIImage *) imageFromImage:(UIImage *)srcImage inRect:(CGRect) rect
 {
-    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, 0.F);
-    [srcImage drawInRect:self.view.bounds];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    CGImageRef croppedImage = CGImageCreateWithImageInRect(image.CGImage, rect);
-    image = [UIImage imageWithCGImage:croppedImage];
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, 2.);
+    CGImageRef croppedImage = CGImageCreateWithImageInRect(srcImage.CGImage, rect);
+    UIImage * image = [UIImage imageWithCGImage:croppedImage];
     CGImageRelease(croppedImage);
     UIGraphicsEndImageContext();
     return image;

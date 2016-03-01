@@ -10,5 +10,5 @@
 #import "NSBKeyframeAnimationFunctions.h"
 #import "CubeMesh.h"
 @interface CubeRenderer : NSObject
-- (void) startCubeTransitionFromView:(UIView *)fromView toView:(UIView *)toView inContainerView:(UIView *)containerView direction:(CubeTransitionDirection)direction duration:(NSTimeInterval)duration screenScale:(CGFloat)screenScale timingFunction:(NSBKeyframeAnimationFunction)timingFunction completion:(void (^)(void))completion;
+- (void) startCubeTransitionFromView:(UIView *)fromView toView:(UIView *)toView columnCount:(NSInteger)columnCount inContainerView:(UIView *)containerView direction:(CubeTransitionDirection)direction duration:(NSTimeInterval)duration screenScale:(CGFloat)screenScale timingFunction:(NSBKeyframeAnimationFunction)timingFunction completion:(void (^)(void))completion;
 @end
