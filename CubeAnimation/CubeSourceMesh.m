@@ -42,22 +42,25 @@
         vertices[i * 4 + 0].position.y = view.bounds.size.height * i * vy;
         vertices[i * 4 + 0].position.z = 0;
         vertices[i * 4 + 0].texCoords = GLKVector2Make(0, 1 - i * vy);
+        vertices[i * 4 + 0].columnStartPosition = vertices[i*4+0].position;
+        
         vertices[i * 4 + 1].position.x = view.bounds.size.width;
         vertices[i * 4 + 1].position.y = view.bounds.size.height * i * vy;
         vertices[i * 4 + 1].position.z = 0;
         vertices[i * 4 + 1].texCoords = GLKVector2Make(1, 1 - i * vy);
+        vertices[i * 4 + 1].columnStartPosition = vertices[i*4+0].position;
+        
         vertices[i * 4 + 2].position.x = 0;
         vertices[i * 4 + 2].position.y = view.bounds.size.height * (i + 1) * vy;
         vertices[i * 4 + 2].position.z = 0;
         vertices[i * 4 + 2].texCoords = GLKVector2Make(0, 1 - (i + 1) * vy);
+        vertices[i * 4 + 2].columnStartPosition = vertices[i*4+0].position;
+        
         vertices[i * 4 + 3].position.x = view.bounds.size.width;
         vertices[i * 4 + 3].position.y = view.bounds.size.height * (i + 1) * vy;
         vertices[i * 4 + 3].position.z = 0;
         vertices[i * 4 + 3].texCoords = GLKVector2Make(1, 1 - (i + 1) * vy);
-    }
-    for (int i = 0; i < self.vertexCount; i++) {
-        SceneMeshVertex vertex = vertices[i];
-        NSLog(@"Vertex:%d.position:(%g, %g, %g), texCoords:(%g, %g)", i, vertex.position.x, vertex.position.y, vertex.position.z, vertex.texCoords.x, vertex.texCoords.y);
+        vertices[i * 4 + 3].columnStartPosition = vertices[i*4+0].position;
     }
     for (int index = 0; index < self.columnCount; index++) {
         indices[index * 6 + 0] = index * 4;
@@ -71,25 +74,31 @@
 
 - (void) generateVerticesForHorizontalTransitionWithView:(UIView *)view
 {
-    GLfloat vx = view.frame.size.width / self.columnCount;
+    GLfloat vx = 1.f / self.columnCount;
     for (int i = 0; i < self.columnCount; i++) {
-        vertices[i * 4 + 0].position.x = i * vx;
+        vertices[i * 4 + 0].position.x = view.bounds.size.width * i * vx;
         vertices[i * 4 + 0].position.y = 0;
         vertices[i * 4 + 0].position.z = 0;
         vertices[i * 4 + 0].texCoords = GLKVector2Make(i * vx, 1);
-        vertices[i * 4 + 1].position.x = i * vx;
+        vertices[i * 4 + 0].columnStartPosition = vertices[i * 4 + 0].position;
+        
+        vertices[i * 4 + 1].position.x = view.bounds.size.width * i * vx;
         vertices[i * 4 + 1].position.y = view.bounds.size.height;
         vertices[i * 4 + 1].position.z = 0;
         vertices[i * 4 + 1].texCoords = GLKVector2Make(i * vx, 0);
+        vertices[i * 4 + 1].columnStartPosition = vertices[i * 4 + 0].position;
         
-        vertices[i * 4 + 2].position.x = (i + 1) * vx;
+        vertices[i * 4 + 2].position.x = view.bounds.size.width * (i + 1) * vx;
         vertices[i * 4 + 2].position.y = 0;
         vertices[i * 4 + 2].position.z = 0;
         vertices[i * 4 + 2].texCoords = GLKVector2Make((i + 1) * vx, 1);
-        vertices[i * 4 + 3].position.x = (i + 1) * vx;
+        vertices[i * 4 + 2].columnStartPosition = vertices[i * 4 + 0].position;
+        
+        vertices[i * 4 + 3].position.x = view.bounds.size.width * (i + 1) * vx;
         vertices[i * 4 + 3].position.y = view.bounds.size.height;
         vertices[i * 4 + 3].position.z = 0;
         vertices[i * 4 + 3].texCoords = GLKVector2Make((i + 1) * vx, 0);
+        vertices[i * 4 + 3].columnStartPosition = vertices[i * 4 + 0].position;
     }
     for (int index = 0; index < self.columnCount; index++) {
         indices[index * 6 + 0] = index * 4;

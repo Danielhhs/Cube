@@ -40,14 +40,15 @@
     self.timingFunction = timingFunction;
     self.elapsedTime = 0;
     self.direction = direction;
+    
     percent = 0;
     [self generateEdgeWidthForView:fromView columnCount:columnCount];
     [self setupOpenGL];
     [self setupTexturesWithSource:fromView destination:toView screenScale:screenScale];
     self.animationView = [[GLKView alloc] initWithFrame:fromView.frame context:self.context];
     self.animationView.delegate = self;
-    self.sourceMesh = [[CubeSourceMesh alloc] initWithView:fromView columnCount:2 transitionDirection:direction];
-    self.destinationMesh = [[CubeDestinationMesh alloc] initWithView:toView columnCount:2 transitionDirection:direction];
+    self.sourceMesh = [[CubeSourceMesh alloc] initWithView:fromView columnCount:columnCount transitionDirection:direction];
+    self.destinationMesh = [[CubeDestinationMesh alloc] initWithView:toView columnCount:columnCount transitionDirection:direction];
     [containerView addSubview:self.animationView];
     self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update:)];
     [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
@@ -74,12 +75,9 @@
 {
     glClear(GL_COLOR_BUFFER_BIT);
     GLfloat aspect = (GLfloat)view.bounds.size.width / view.bounds.size.height;
-    GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2 / tan(M_PI / 24));
-        GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(15), aspect, 1, 1000);
-//    GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2 / tan(M_PI / 6) - 100);
-//    GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60), aspect, 1, 1000);
+    GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2 / tan(M_PI / 24) - 100);
+        GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(15), aspect, 1, 10000);
     mvpMatrix = GLKMatrix4Multiply(perspective, modelView);
-//    mvpMatrix = GLKMatrix4MakeOrtho(0, view.drawableWidth, 0, view.drawableHeight, -1000, 1000);
     
     if (percent <= 0.5) {
         [self drawDestinationFaceInView:view];

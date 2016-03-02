@@ -16,6 +16,8 @@
 
 - (void) drawEntireMesh
 {
-    glDrawElements(GL_TRIANGLES, (GLsizei)self.indexCount, GL_UNSIGNED_SHORT, NULL);
+    for (int i = 0; i < self.columnCount; i++) {
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, NULL + (i * 6 * sizeof(GLushort)));
+    }
 }
 @end

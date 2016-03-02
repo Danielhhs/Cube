@@ -7,6 +7,7 @@ uniform int u_direction;
 
 layout(location = 0) in vec4 a_position;
 layout(location = 2) in vec2 a_texCoords;
+layout(location = 3) in vec3 a_columnStartPosition;
 
 out vec2 v_texCoords;
 
@@ -19,7 +20,7 @@ vec4 updatedPositionForRightToLeft() {
     vec4 position = a_position;
     float rotation = u_percent * pi_2 - pi_4;
     float radius = u_edgeWidth * sqrt_2 / 2.f;
-    vec2 center = vec2(u_edgeWidth /  2.f, -u_edgeWidth / 2.f);
+    vec2 center = vec2(a_columnStartPosition.x - u_edgeWidth /  2.f, -u_edgeWidth / 2.f);
     if (position.z == 0.f) {
         position.x = center.x - radius * sin(rotation);
         position.z = center.y + radius * cos(rotation);
@@ -34,13 +35,13 @@ vec4 updatedPositionForLeftToRight() {
     vec4 position = a_position;
     float rotation = u_percent * pi_2 - pi_4;
     float radius = u_edgeWidth * sqrt_2 / 2.f;
-    vec2 center = vec2(u_edgeWidth /  2.f, -u_edgeWidth / 2.f);
+    vec2 center = vec2(a_columnStartPosition.x + u_edgeWidth /  2.f, -u_edgeWidth / 2.f);
     if (position.z == 0.f) {
         position.x = center.x + radius * sin(rotation);
         position.z = center.y + radius * cos(rotation);
     } else {
-        position.x = center.y + radius * sin(rotation);
-        position.z = center.x - radius * cos(rotation);
+        position.x = center.x - radius * cos(rotation);
+        position.z = center.y + radius * sin(rotation);
     }
     return position;
 }
@@ -49,7 +50,7 @@ vec4 updatedPositionForTopToBottom() {
     vec4 position = a_position;
     float rotation = u_percent * pi_2 - pi_4;
     float radius = u_edgeWidth * sqrt_2 / 2.f;
-    vec2 center = vec2(u_edgeWidth /  2.f, -u_edgeWidth / 2.f);
+    vec2 center = vec2(a_columnStartPosition.y - u_edgeWidth /  2.f, -u_edgeWidth / 2.f);
     if (position.z == 0.f) {
         position.y = center.x - radius * sin(rotation);
         position.z = radius * cos(rotation) + center.y;
@@ -64,7 +65,7 @@ vec4 updatedPositionForBottomToTop() {
     vec4 position = a_position;
     float rotation = u_percent * pi_2 - pi_4;
     float radius = u_edgeWidth * sqrt_2 / 2.f;
-    vec2 center = vec2(u_edgeWidth /  2.f, -u_edgeWidth / 2.f);
+    vec2 center = vec2(a_columnStartPosition.y + u_edgeWidth /  2.f, -u_edgeWidth / 2.f);
     if (position.z == 0.f) {
         position.y = center.x + radius * sin(rotation);
         position.z = radius * cos(rotation) + center.y;

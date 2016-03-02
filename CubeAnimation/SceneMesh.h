@@ -12,6 +12,7 @@ typedef struct {
     GLKVector3 position;
     GLKVector3 normal;
     GLKVector2 texCoords;
+    GLKVector3 columnStartPosition;
 }SceneMeshVertex;
 
 @interface SceneMesh : NSObject {

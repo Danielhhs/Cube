@@ -60,7 +60,7 @@
     fromImageView.image = [self imageFromView:self.view inRect:fromImageView.frame];
     UIImageView *toImageView = [[UIImageView alloc] initWithFrame:fromImageView.frame];
     toImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:fromImageView.frame];
-    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionTopToBottom duration:2 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView columnCount:12 inContainerView:self.view direction:CubeTransitionDirectionTopToBottom duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
 }
 
 
@@ -72,7 +72,7 @@
     fromImageView.image = [self imageFromView:self.view inRect:fromImageView.frame];
     UIImageView *toImageView = [[UIImageView alloc] initWithFrame:fromImageView.frame];
     toImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:fromImageView.frame];
-    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionRightToLeft duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView columnCount:12 inContainerView:self.view direction:CubeTransitionDirectionRightToLeft duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
 }
 
 - (void) handleLeftRecover
@@ -83,7 +83,7 @@
     toImageView.image = [self imageFromView:self.view inRect:toImageView.frame];
     UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:toImageView.frame];
     fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:toImageView.frame];
-    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionLeftToRight duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView columnCount:12 inContainerView:self.view direction:CubeTransitionDirectionLeftToRight duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
 }
 
 - (void) handleRecover
@@ -94,7 +94,7 @@
     toImageView.image = [self imageFromView:self.view inRect:toImageView.frame];
     UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:toImageView.frame];
     fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:toImageView.frame];
-    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView inContainerView:self.view direction:CubeTransitionDirectionBottomToTop duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView columnCount:12 inContainerView:self.view direction:CubeTransitionDirectionBottomToTop duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
 }
 
 - (UIImage *) imageFromImage:(UIImage *)srcImage inRect:(CGRect) rect
