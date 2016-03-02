@@ -29,6 +29,7 @@
 @property (nonatomic, strong) CubeDestinationMesh *destinationMesh;
 @property (nonatomic) CubeTransitionDirection direction;
 @property (nonatomic) GLfloat edgeWidth;
+@property (nonatomic) NSInteger columnCount;
 @end
 
 @implementation CubeRenderer
@@ -40,6 +41,7 @@
     self.timingFunction = timingFunction;
     self.elapsedTime = 0;
     self.direction = direction;
+    self.columnCount = columnCount;
     
     percent = 0;
     [self generateEdgeWidthForView:fromView columnCount:columnCount];
@@ -75,51 +77,67 @@
 {
     glClear(GL_COLOR_BUFFER_BIT);
     GLfloat aspect = (GLfloat)view.bounds.size.width / view.bounds.size.height;
-    GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2 / tan(M_PI / 24) - 100);
+    GLKMatrix4 modelView = GLKMatrix4Translate(GLKMatrix4Identity, -view.bounds.size.width / 2, -view.bounds.size.height / 2, -view.bounds.size.height / 2 / tan(M_PI / 24));
         GLKMatrix4 perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(15), aspect, 1, 10000);
     mvpMatrix = GLKMatrix4Multiply(perspective, modelView);
     
-    if (percent <= 0.5) {
-        [self drawDestinationFaceInView:view];
-        [self drawSourceFaceInView:view];
-    } else {
-        [self drawSourceFaceInView:view];
-        [self drawDestinationFaceInView:view];
-    }
-}
-
-- (void) drawDestinationFaceInView:(GLKView *)view;
-{
     glUseProgram(dstFaceProgram);
     glUniformMatrix4fv(dstMvpLoc, 1, GL_FALSE, mvpMatrix.m);
     glUniform1f(dstFacePercentLoc, percent);
     glUniform1f(dstFaceEdgeWidthLoc, self.edgeWidth);
     glUniform1i(dstDirectionLoc, self.direction);
-    [self.destinationMesh prepareToDraw];
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, dstTexture);
-    glUniform1i(dstFaceSamplerLoc, 0);
-    [self.destinationMesh drawEntireMesh];
-}
-
-- (void) drawSourceFaceInView:(GLKView *)view {
+    
     glUseProgram(srcFaceProgram);
     glUniformMatrix4fv(srcMvpLoc, 1, GL_FALSE, mvpMatrix.m);
     glUniform1f(srcFacePercentLoc, percent);
     glUniform1f(srcFaceEdgeWidthLoc, self.edgeWidth);
     glUniform1i(srcDirectionLoc, self.direction);
+    
+    for (int i = 0; i < self.columnCount / 2; i++) {
+        if (percent < .5) {
+            [self drawDestinationFaceColumn:i inView:self.animationView];
+            [self drawSourceFaceColumn:i inView:self.animationView];
+        } else {
+            [self drawSourceFaceColumn:i inView:self.animationView];
+            [self drawDestinationFaceColumn:i inView:self.animationView];
+        }
+    }
+    
+    for (NSInteger i = self.columnCount; i >= self.columnCount / 2; i--) {
+        if (percent < .5) {
+            [self drawDestinationFaceColumn:i inView:self.animationView];
+            [self drawSourceFaceColumn:i inView:self.animationView];
+        } else {
+            [self drawSourceFaceColumn:i inView:self.animationView];
+            [self drawDestinationFaceColumn:i inView:self.animationView];
+        }
+    }
+}
+
+- (void) drawDestinationFaceColumn:(NSInteger)column inView:(GLKView *)view;
+{
+    glUseProgram(dstFaceProgram);
+    [self.destinationMesh prepareToDraw];
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, dstTexture);
+    glUniform1i(dstFaceSamplerLoc, 0);
+    [self.destinationMesh drawColumnAtIndex:column];
+}
+
+- (void) drawSourceFaceColumn:(NSInteger)column inView:(GLKView *)view {
+    glUseProgram(srcFaceProgram);
     [self.sourceMesh prepareToDraw];
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, srcTexture);
     glUniform1i(srcFaceSamplerLoc, 0);
-    [self.sourceMesh drawEntireMesh];
+    [self.sourceMesh drawColumnAtIndex:column];
 }
 
 - (void) update:(CADisplayLink *)displayLink
 {
     self.elapsedTime += displayLink.duration;
     if (self.elapsedTime < self.duration) {
-        GLfloat populatedTime = self.timingFunction(self.elapsedTime * 1000, 0, 1, self.duration * 1000);
+        GLfloat populatedTime = self.timingFunction(self.elapsedTime * 1000, 0, self.duration, self.duration * 1000);
         percent = populatedTime / self.duration;
         [self.animationView display];
     } else {

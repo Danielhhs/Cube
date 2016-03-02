@@ -20,4 +20,9 @@
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, NULL + (i * 6 * sizeof(GLushort)));
     }
 }
+
+- (void) drawColumnAtIndex:(NSInteger)index
+{
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, NULL + (index * 6 * sizeof(GLushort)));
+}
 @end

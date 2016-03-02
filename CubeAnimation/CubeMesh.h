@@ -21,4 +21,6 @@ typedef NS_ENUM(NSInteger, CubeTransitionDirection) {
 @property (nonatomic) NSInteger indexCount;
 - (instancetype) initWithView:(UIView *)view columnCount:(NSInteger)columnCount transitionDirection:(CubeTransitionDirection)direction;
 @property (nonatomic) NSInteger columnCount;
+
+- (void) drawColumnAtIndex:(NSInteger)index;
 @end
