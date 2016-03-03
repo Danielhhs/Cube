@@ -175,7 +175,20 @@
 
 - (void) tearDownGL
 {
-    
+    [EAGLContext setCurrentContext:self.context];
+    [self.sourceMesh destroyGL];
+    [self.destinationMesh destroyGL];
+    glDeleteTextures(1, &srcTexture);
+    srcTexture = 0;
+    glDeleteTextures(1, &dstTexture);
+    dstTexture = 0;
+    glDeleteProgram(srcFaceProgram);
+    srcFaceProgram = 0;
+    glDeleteProgram(dstFaceProgram);
+    dstFaceProgram = 0;
+    [EAGLContext setCurrentContext:nil];
+    self.context = nil;
+    self.animationView = nil;
 }
 
 - (void) setupTexturesWithSource:(UIView *)source destination:(UIView *)destination screenScale:(CGFloat)screenScale
