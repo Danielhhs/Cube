@@ -96,10 +96,6 @@
         vertices[i * 4 + 3].texCoords = GLKVector2Make((i + 1) * vx, 0);
         vertices[i * 4 + 3].columnStartPosition = vertices[i * 4 + 0].position;
     }
-    for (int i = 0; i < self.vertexCount; i++) {
-        SceneMeshVertex vertex = vertices[i];
-        NSLog(@"vertex[%d].position = (%g, %g, %g), texCoords = (%g, %g)", i, vertex.position.x, vertex.position.y, vertex.position.z, vertex.texCoords.x, vertex.texCoords.y);
-    }
 }
 
 
@@ -131,12 +127,7 @@
         vertices[i * 4 + 1].columnStartPosition = vertices[i * 4 + 0].position;
         vertices[i * 4 + 2].columnStartPosition = vertices[i * 4 + 0].position;
         vertices[i * 4 + 3].columnStartPosition = vertices[i * 4 + 0].position;
-        NSLog(@"ColumnStartPosition = (%g, %g, %g)", vertices[i * 4 + 0].position.x, vertices[i * 4 + 0].position.y, vertices[i * 4 + 0].position.z);
     }
-//            for (int i = 0; i < self.vertexCount; i++) {
-//                SceneMeshVertex vertex = vertices[i];
-//                NSLog(@"vertex[%d].position = (%g, %g, %g), texCoords = (%g, %g)", i, vertex.position.x, vertex.position.y, vertex.position.z, vertex.texCoords.x, vertex.texCoords.y);
-//            }
 }
 
 - (void) setupVerticesForTopToBottomForView:(UIView *)view
@@ -167,10 +158,6 @@
         vertices[i * 4 + 3].texCoords = GLKVector2Make(1, 1 - vy * (i + 1));
         vertices[i * 4 + 3].columnStartPosition = vertices[i * 4 + 0].position;
     }
-//    for (int i = 0; i < self.vertexCount; i++) {
-//        SceneMeshVertex vertex = vertices[i];
-//        NSLog(@"vertex[%d].position = (%g, %g, %g), texCoords = (%g, %g)", i, vertex.position.x, vertex.position.y, vertex.position.z, vertex.texCoords.x, vertex.texCoords.y);
-//    }
 }
 
 - (void) setupVerticesForBottomToTopForView:(UIView *)view
@@ -201,9 +188,5 @@
         vertices[i * 4 + 3].texCoords = GLKVector2Make(1, 1 - vy * (i + 1));
         vertices[i * 4 + 3].columnStartPosition = vertices[i * 4 + 0].position;
     }
-//        for (int i = 0; i < self.vertexCount; i++) {
-//            SceneMeshVertex vertex = vertices[i];
-//            NSLog(@"vertex[%d].position = (%g, %g, %g), texCoords = (%g, %g)", i, vertex.position.x, vertex.position.y, vertex.position.z, vertex.texCoords.x, vertex.texCoords.y);
-//        }
 }
 @end

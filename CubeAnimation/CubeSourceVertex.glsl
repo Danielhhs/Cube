@@ -30,6 +30,7 @@ vec4 updatedPositionForRightToLeft() {
         position.x = center.x - radius * sin(rotation);
         position.z = center.y + radius * cos(rotation);
     }
+    v_normal = vec3(sin(u_percent * pi_2), 0.f, cos(u_percent * pi_2));
     return position;
 }
 
@@ -45,6 +46,7 @@ vec4 updatedPositionForLeftToRight() {
         position.x = center.x + radius * cos(rotation);
         position.z = center.y - radius * sin(rotation);
     }
+    v_normal = vec3(sin(u_percent * pi_2), 0.f, cos(u_percent * pi_2));
     return position;
 }
 
@@ -60,6 +62,7 @@ vec4 updatedPositionForTopToBottom() {
         position.y = center.x - radius * sin(rotation);
         position.z = radius * cos(rotation) + center.y;
     }
+    v_normal = vec3(0.f, sin(u_percent * pi_2), cos(u_percent * pi_2));
     return position;
 }
 
@@ -75,6 +78,7 @@ vec4 updatedPositionForBottomToTop() {
         position.z = center.y - radius * sin(rotation);
         position.y = center.x + radius * cos(rotation);
     }
+    v_normal = vec3(0.f, sin(u_percent * pi_2), cos(u_percent * pi_2));
     return position;
 }
 
