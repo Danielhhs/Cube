@@ -10,6 +10,7 @@
 #import "OpenGLHelper.h"
 #import "CubeSourceMesh.h"
 #import "CubeDestinationMesh.h"
+#import "TextureHelper.h"
 @interface CubeRenderer ()<GLKViewDelegate> {
     GLuint srcFaceProgram, srcFacePercentLoc, srcMvpLoc, srcFaceSamplerLoc, srcFaceEdgeWidthLoc, srcDirectionLoc;
     GLuint dstFaceProgram, dstFacePercentLoc, dstMvpLoc, dstFaceSamplerLoc, dstFaceEdgeWidthLoc, dstDirectionLoc;
@@ -33,6 +34,15 @@
 @end
 
 @implementation CubeRenderer
+- (void) startCubeTransitionFromView:(UIView *)fromView toView:(UIView *)toView columnCount:(NSInteger)columnCount inContainerView:(UIView *)containerView direction:(CubeTransitionDirection)direction duration:(NSTimeInterval)duration screenScale:(CGFloat)screenScale
+{
+    [self startCubeTransitionFromView:fromView toView:toView columnCount:columnCount inContainerView:containerView direction:direction duration:duration screenScale:screenScale completion:nil];
+}
+
+- (void) startCubeTransitionFromView:(UIView *)fromView toView:(UIView *)toView columnCount:(NSInteger)columnCount inContainerView:(UIView *)containerView direction:(CubeTransitionDirection)direction duration:(NSTimeInterval)duration screenScale:(CGFloat)screenScale completion:(void (^)(void))completion
+{
+    [self startCubeTransitionFromView:fromView toView:toView columnCount:columnCount inContainerView:containerView direction:direction duration:duration screenScale:screenScale timingFunction:NSBKeyframeAnimationFunctionEaseInCubic completion:completion];
+}
 
 - (void) startCubeTransitionFromView:(UIView *)fromView toView:(UIView *)toView columnCount:(NSInteger)columnCount inContainerView:(UIView *)containerView direction:(CubeTransitionDirection)direction duration:(NSTimeInterval)duration screenScale:(CGFloat)screenScale timingFunction:(NSBKeyframeAnimationFunction)timingFunction completion:(void (^)(void))completion
 {
@@ -143,6 +153,8 @@
     } else {
         percent = 1;
         [self.animationView display];
+        [displayLink invalidate];
+        self.displayLink = nil;
         [self.animationView removeFromSuperview];
         [self tearDownGL];
         if (self.completion) {
@@ -193,8 +205,10 @@
 
 - (void) setupTexturesWithSource:(UIView *)source destination:(UIView *)destination screenScale:(CGFloat)screenScale
 {
-    srcTexture = [OpenGLHelper setupTextureWithView:source textureWidth:source.frame.size.width * screenScale textureHeight:source.frame.size.height * screenScale screenScale:screenScale];
-    dstTexture = [OpenGLHelper setupTextureWithView:destination textureWidth:destination.frame.size.width * screenScale textureHeight:destination.frame.size.height * screenScale screenScale:screenScale];
+    srcTexture = [TextureHelper setupTextureWithView:source];
+    dstTexture = [TextureHelper setupTextureWithView:destination];
+//    srcTexture = [OpenGLHelper setupTextureWithView:source textureWidth:source.frame.size.width * screenScale textureHeight:source.frame.size.height * screenScale screenScale:screenScale];
+//    dstTexture = [OpenGLHelper setupTextureWithView:destination textureWidth:destination.frame.size.width * screenScale textureHeight:destination.frame.size.height * screenScale screenScale:screenScale];
 }
 
 @end

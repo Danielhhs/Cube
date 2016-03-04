@@ -10,6 +10,8 @@
 #import "CubeRenderer.h"
 @interface ViewController ()
 @property (nonatomic, strong) CubeRenderer *renderer;
+@property (nonatomic, strong) UIView *notificationBanner;
+@property (nonatomic, strong) UIImageView *originalView;
 @end
 
 @implementation ViewController
@@ -55,12 +57,15 @@
 - (void) handleNotification
 {
     self.renderer = [[CubeRenderer alloc] init];
-//    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    fromImageView.image = [self imageFromView:self.view inRect:fromImageView.frame];
-    UIImageView *toImageView = [[UIImageView alloc] initWithFrame:fromImageView.frame];
-    toImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:fromImageView.frame];
-    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView columnCount:5 inContainerView:self.view direction:CubeTransitionDirectionTopToBottom duration:3 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+    self.originalView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+//    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    self.originalView.image = [self imageFromView:self.view inRect:self.originalView.frame];
+//    UIImageView *toImageView = [[UIImageView alloc] initWithFrame:fromImageView.frame];
+//    toImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:fromImageView.frame];
+//    toImageView.contentMode = UIViewContentModeScaleToFill;
+    [self.renderer startCubeTransitionFromView:self.originalView toView:self.notificationBanner columnCount:1 inContainerView:self.view direction:CubeTransitionDirectionTopToBottom duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutCubic completion:^{
+        [self.view addSubview:self.notificationBanner];
+    }];
 }
 
 
@@ -71,8 +76,11 @@
     UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     fromImageView.image = [self imageFromView:self.view inRect:fromImageView.frame];
     UIImageView *toImageView = [[UIImageView alloc] initWithFrame:fromImageView.frame];
+    toImageView.contentMode = UIViewContentModeScaleToFill;
     toImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:fromImageView.frame];
-    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView columnCount:5 inContainerView:self.view direction:CubeTransitionDirectionRightToLeft duration:3 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView columnCount:5 inContainerView:self.view direction:CubeTransitionDirectionRightToLeft duration:3 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:^{
+        [self.originalView removeFromSuperview];
+    }];
 }
 
 - (void) handleLeftRecover
@@ -83,18 +91,21 @@
     toImageView.image = [self imageFromView:self.view inRect:toImageView.frame];
     UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:toImageView.frame];
     fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:toImageView.frame];
-    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView columnCount:5 inContainerView:self.view direction:CubeTransitionDirectionLeftToRight duration:3 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+    fromImageView.contentMode = UIViewContentModeScaleToFill;
+    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView columnCount:5 inContainerView:self.view direction:CubeTransitionDirectionLeftToRight duration:3 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutCubic completion:nil];
 }
 
 - (void) handleRecover
 {
+    [self.notificationBanner removeFromSuperview];
     self.renderer = [[CubeRenderer alloc] init];
-    //    UIImageView * toImageView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, self.view.bounds.size.height)];
-    UIImageView * toImageView= [[UIImageView alloc] initWithFrame:self.view.bounds];
-    toImageView.image = [self imageFromView:self.view inRect:toImageView.frame];
-    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:toImageView.frame];
-    fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:toImageView.frame];
-    [self.renderer startCubeTransitionFromView:fromImageView toView:toImageView columnCount:5 inContainerView:self.view direction:CubeTransitionDirectionBottomToTop duration:3 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutBack completion:nil];
+//        UIImageView * toImageView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+//    UIImageView * toImageView= [[UIImageView alloc] initWithFrame:self.view.bounds];
+//    toImageView.image = [self imageFromView:self.view inRect:toImageView.frame];
+//    UIImageView *fromImageView = [[UIImageView alloc] initWithFrame:toImageView.frame];
+//    fromImageView.image = [self imageFromImage:[UIImage imageNamed:@"toImage.jpg"] inRect:toImageView.frame];
+//    fromImageView.contentMode = UIViewContentModeScaleToFill;
+    [self.renderer startCubeTransitionFromView:self.notificationBanner toView:self.originalView columnCount:1 inContainerView:self.view direction:CubeTransitionDirectionBottomToTop duration:1 screenScale:[UIScreen mainScreen].scale timingFunction:NSBKeyframeAnimationFunctionEaseInOutCubic completion:nil];
 }
 
 - (UIImage *) imageFromImage:(UIImage *)srcImage inRect:(CGRect) rect
@@ -118,6 +129,22 @@
     CGImageRelease(croppedImage);
     UIGraphicsEndImageContext();
     return image;
+}
+
+- (UIView *)notificationBanner
+{
+    if (!_notificationBanner) {
+        _notificationBanner = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+        _notificationBanner.backgroundColor = [UIColor lightGrayColor];
+        UILabel *text = [[UILabel alloc] init];
+        text.backgroundColor = [UIColor clearColor];
+        text.textColor = [UIColor whiteColor];
+        text.text = @"You've got a message";
+        [text sizeToFit];
+        text.center = CGPointMake(CGRectGetMidX(_notificationBanner.bounds), CGRectGetMidY(_notificationBanner.bounds));
+        [_notificationBanner addSubview:text];
+    }
+    return _notificationBanner;
 }
 
 @end

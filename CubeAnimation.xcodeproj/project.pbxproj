@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		545606C81C88409C0048CF62 /* TextureHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 545606C71C88409C0048CF62 /* TextureHelper.m */; };
 		54792F881C7023E000F55486 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792F871C7023E000F55486 /* main.m */; };
 		54792F8B1C7023E000F55486 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792F8A1C7023E000F55486 /* AppDelegate.m */; };
 		54792F8E1C7023E000F55486 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54792F8D1C7023E000F55486 /* ViewController.m */; };
@@ -50,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		545606C61C88409C0048CF62 /* TextureHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureHelper.h; sourceTree = "<group>"; };
+		545606C71C88409C0048CF62 /* TextureHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureHelper.m; sourceTree = "<group>"; };
 		54792F831C7023E000F55486 /* CubeAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CubeAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54792F871C7023E000F55486 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		54792F891C7023E000F55486 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 				54792F8D1C7023E000F55486 /* ViewController.m */,
 				54792FD71C7056B600F55486 /* image.jpg */,
 				54792FD91C70596E00F55486 /* toImage.jpg */,
+				545606C61C88409C0048CF62 /* TextureHelper.h */,
+				545606C71C88409C0048CF62 /* TextureHelper.m */,
 				54792FB91C70252000F55486 /* OpenGLHelper.h */,
 				54792FBA1C70252000F55486 /* OpenGLHelper.m */,
 				54792FBC1C7025AD00F55486 /* CubeRenderer.h */,
@@ -344,6 +349,7 @@
 				54792FD01C70513E00F55486 /* CubeSourceMesh.m in Sources */,
 				54792FDD1C7066B300F55486 /* CubeMesh.m in Sources */,
 				54792FC51C7029FE00F55486 /* NSBKeyframeAnimationFunctions.c in Sources */,
+				545606C81C88409C0048CF62 /* TextureHelper.m in Sources */,
 				54792F8B1C7023E000F55486 /* AppDelegate.m in Sources */,
 				54792FBB1C70252000F55486 /* OpenGLHelper.m in Sources */,
 				54792F881C7023E000F55486 /* main.m in Sources */,
@@ -574,6 +580,7 @@
 				54792FB21C7023E000F55486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		54792FB31C7023E000F55486 /* Build configuration list for PBXNativeTarget "CubeAnimationTests" */ = {
 			isa = XCConfigurationList;
@@ -582,6 +589,7 @@
 				54792FB51C7023E000F55486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		54792FB61C7023E000F55486 /* Build configuration list for PBXNativeTarget "CubeAnimationUITests" */ = {
 			isa = XCConfigurationList;
@@ -590,6 +598,7 @@
 				54792FB81C7023E000F55486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
