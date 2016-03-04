@@ -14,4 +14,8 @@
 
 + (GLuint) setupTextureWithView:(UIView *)view inRect:(CGRect)rect;
 
++ (GLuint) setupTextureWithImage:(UIImage *)image;
+
++ (GLuint) setupTextureWithImage:(UIImage *)image inRect:(CGRect)rect;
+
 @end

@@ -25,6 +25,18 @@
     return texture;
 }
 
++ (GLuint) setupTextureWithImage:(UIImage *)image
+{
+    return [TextureHelper setupTextureWithImage:image inRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+}
+
++ (GLuint) setupTextureWithImage:(UIImage *)image inRect:(CGRect)rect
+{
+    GLuint texture = [TextureHelper generateTexture];
+    [TextureHelper drawRect:rect inImage:image onTexture:texture];
+    return texture;
+}
+
 + (GLuint) generateTexture
 {
     GLuint texture;
@@ -37,6 +49,17 @@
     
     glBindTexture(GL_TEXTURE_2D, 0);
     return texture;
+}
+
++ (void) drawRect:(CGRect)rect inImage:(UIImage *)image onTexture:(GLuint)texture
+{
+    CGFloat screenScale = [UIScreen mainScreen].scale;
+    CGFloat textureWidth = rect.size.width * screenScale;
+    CGFloat textureHeight = rect.size.height * screenScale;
+    UIImage *imageToDraw = [UIImage imageWithCGImage:CGImageCreateWithImageInRect(image.CGImage, CGRectMake(rect.origin.x * screenScale, rect.origin.y * screenScale, rect.size.width * screenScale, rect.size.height * screenScale))];
+    [self drawRect:rect onTexture:texture textureWidth:textureWidth textureHeight:textureHeight drawBlock:^(CGContextRef context) {
+        CGContextDrawImage(context, CGRectMake(0, 0, textureWidth, textureHeight), imageToDraw.CGImage);
+    }];
 }
 
 + (void) drawRect:(CGRect)rect inView:(UIView *)view onTexture:(GLuint)texture
